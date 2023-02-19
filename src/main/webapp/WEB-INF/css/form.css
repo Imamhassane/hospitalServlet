@@ -1,0 +1,158 @@
+/*form*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color:#F1F1F1;
+    display: none;
+}
+
+::-webkit-scrollbar
+{
+    width:8px;
+    background-color: #C1C1C1;
+    display: none;
+
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #C1C1C1;
+}
+
+.info-client,
+.update,
+.remove-item{
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .7);
+    animation: fadeIn 1s;
+    display: none;
+}
+.info-client.open,
+.update.open,
+.remove-item.open{
+    display: flex;
+}
+
+form, .form-remove{
+    padding: 30px 40px 15px 40px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 55%;
+    max-height: 85vh;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+.form-controle{
+    padding: 10px 4px;
+    text-align: left !important;
+}
+.form-controle label {
+    color: #777;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.form-controle input , select {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100% !important;
+    padding: 10px;
+    font-size: 14px;
+}
+.select2 {
+    width: 100% !important;
+}
+.form-controle input:focus , select:focus {
+    outline: 0;
+    border-color: #777;
+}
+form .submit {
+    cursor: pointer;
+    background-color: #212529;
+    border: 2px solid #212529;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple{
+    height: 44px !important;
+    border: 2px solid #f0f0f0 !important;
+
+}
+
+.form-controle.success input ,
+.form-controle.success .select2-container .select2-selection--single,
+.form-controle.success .select2-container .select2-selection--multiple{
+    border-color: green !important;
+}
+
+.form-controle.error input ,
+.form-controle.error .select2-container .select2-selection--single,
+.form-controle.error .select2-container .select2-selection--multiple{
+    border-color: red !important;
+}
+.form-controle small {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+.form-controle.error small {
+    display: block;
+}
+.d-flex{
+    flex-direction: column;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.search-box {
+    width: 350px;
+    position: relative;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.search-input {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 15px 45px 15px 15px;
+    color: #6c6c6c;
+    border-radius: 6px;
+    border:1px solid #eaeaeb;
+    transition: all .4s;
+}
+
+.search-input:focus {
+    border:none;
+    outline:none;
+    box-shadow: 0 1px 12px #b8c6db;
+    -moz-box-shadow: 0 1px 12px #b8c6db;
+    -webkit-box-shadow: 0 1px 12px #b8c6db;
+}
+
+a , h4{
+    white-space: nowrap;
+}
