@@ -52,6 +52,13 @@ public class SpecialiteServlet extends HttpServlet {
         if (request.getParameter("id") != null){
             id = Long.parseLong(request.getParameter("id"));
         }
+        List<String> names= new ArrayList<>();
+        for (Specialite s : specialiteService.findAll()){
+            if (s.getLibelle() != null){
+                names.add(s.getLibelle());
+            }
+        }
+        request.setAttribute("names" , names);
         switch (action){
             case "/hospital/specialite/list" :
                 request.setAttribute("specialiteList" , specialiteService.findAll());

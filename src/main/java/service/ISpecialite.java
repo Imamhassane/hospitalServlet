@@ -11,5 +11,5 @@ public interface ISpecialite {
     Specialite find(long id) throws Exception;
     void remove(Specialite entity) throws Exception;
     long count() throws Exception;
-    public boolean findService(Service service);
+    public boolean findService(Service service) throws Exception;
 }

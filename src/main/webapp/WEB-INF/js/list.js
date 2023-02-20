@@ -8,7 +8,7 @@ const nonButton= document.getElementsByClassName("non-button");
 const deleteButton = document.getElementsByClassName("delete");
 const removeItemModal  = document.getElementsByClassName("remove-item");
 const searchResult = document.getElementsByClassName("search-result");
-const searchInput = document.getElementById("search-input")
+const searchInput = document.getElementById("search-input");
 const tittle = document.getElementById("tittle");
 const tittleVide = document.getElementById("tittleVide");
 const hiddenTr = document.getElementById("hiddenTr");
@@ -30,10 +30,18 @@ if (edit){
     for (let i = 0; i < edit.length; i++) {
         let button = edit[i];
         button.addEventListener("click" , ()=>{
-            document.body.style.overflowY = "hidden"
+            document.body.style.overflowY = "hidden";
             update[i].classList.add("open");
+
             if (localStorage.getItem("emailexist")){
-                localStorage.setItem("emailexist",emailClass[i].value);
+                let val ;
+                if (button.classList.contains("Sedit")){
+                    val = nomClass[i].value;
+                }else{
+                    val = emailClass[i].value;
+                }
+                console.log(val);
+                localStorage.setItem("emailexist", val);
             }
         });
         deleteButton[i].addEventListener("click",()=>{
@@ -50,7 +58,8 @@ document.onclick = function(e){
     if(e.target.id === 'info-client' && e.target.id !== 'openModal'
         || e.target.className === "update open"
         ||  e.target.className === "remove-item open"
-    ){
+    )
+    {
         infoClient.classList.remove("open");
         for (let i = 0; i < update.length; i++) {
             update[i].classList.remove("open");

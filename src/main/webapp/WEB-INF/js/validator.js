@@ -5,7 +5,6 @@ const formMedcin = document.getElementById('formMedcin');
 const formService = document.getElementById('formService');
 const formSpecialite = document.getElementById('formSpecialite');
 const nom = document.getElementById('nom');
-const nomClass = document.getElementsByClassName('nom');
 const serviceClass = document.getElementsByClassName('service');
 const formServiceUpdate = document.getElementsByClassName('formService');
 const formSpecialiteUpdate = document.getElementsByClassName('formSpecialite');
@@ -21,6 +20,7 @@ const specialite = document.getElementById('specialite');
 const service = document.getElementById('service');
 const emails = document.getElementsByClassName('allEmails');
 //
+const nomClass = document.getElementsByClassName('nom');
 const prenomClass = document.getElementsByClassName('prenom');
 const salaireClass = document.getElementsByClassName('salaire');
 const emailClass = document.getElementsByClassName('email');
@@ -70,7 +70,7 @@ function checkLength(input, min, max) {//Tester la longueur de la valeur  d'un i
     }
 }
 //
-function emailExist(input){
+function emailExist(input , message){
     let mail = localStorage.getItem("emailexist");
     let newArr = [];
 
@@ -91,7 +91,7 @@ function emailExist(input){
     for (let i = 0; i < newArr.length; i++) {
         let index = newArr[i];
         if (index === input.value){
-            showError(input, "Cet email existe deja!");
+            showError(input, message);
         }
     }
 }
@@ -126,6 +126,7 @@ function verifServiceForm(form , input) {
     form.addEventListener('submit',(e)=>{
         isVerify = [];
         checkLength(input , 3 , 20);
+        emailExist(input,"Ce service existe deja!");
         for (let i = 0; i < isVerify.length; i++) {
             if (isVerify[i]===false) {
                 e.preventDefault();//Bloquer la soumission du formulaire
@@ -151,6 +152,7 @@ function specialiteForm(form, input , s ) {
     form.addEventListener('submit',(e)=>{
         isVerify = [];
         checkLength(input , 3 , 20);
+        emailExist(input,"Cette specialite existe deja!");
         checkRequired([s]);
         for (let i = 0; i < isVerify.length; i++) {
             if (isVerify[i]===false) {
@@ -181,7 +183,8 @@ if (formMedcinUpdate || formMedcin){
             checkLength(input4 ,  5, 10);
             checkRequired([input5 , input6 ,input7, input8 ]);
             checkEmail(input9);
-            emailExist(input9);
+            emailExist(input9,"Cet email existe deja!");
+
             for (let i = 0; i < isVerify.length; i++) {
                 if (isVerify[i]===false) {
                     e.preventDefault();//Bloquer la soumission du formulaire
@@ -204,7 +207,7 @@ if (formMedcinUpdate){
         medcinForm(
             formMedcinUpdate[i] , adresseClass[i] ,
             nomClass[i], prenomClass[i] , salaireClass[i] , passwordClass[i] , naissanceClass[i] ,
-            embaucheClass[i] , specialiteClass[i] , serviceClass[i] ,emailClass[i]
+            embaucheClass[i] , specialiteClass[i] , serviceClass[i] , emailClass[i]
         );
     }
 }

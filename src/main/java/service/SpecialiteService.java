@@ -1,5 +1,6 @@
 package service;
 
+import model.Medcin;
 import model.Service;
 import model.Specialite;
 import org.hibernate.Session;
@@ -21,14 +22,16 @@ public class SpecialiteService  extends AbstractFacade<Specialite> implements  I
         return session;
     }
 
-    public boolean findService(Service service){
-        try{
-            session.createQuery("SELECT sp FROM Specialite sp where sp.service = :service" , Specialite.class)
-                    .setParameter("service" , service)
-                    .getSingleResult();
-            return true;
-        }catch (Exception e){
-            return false;
+    public boolean findService(Service service) throws Exception {
+        boolean result = false;
+        if (count() > 0){
+            for (Specialite m : findAll()){
+                if (m.getService().equals(service)) {
+                    result = true;
+                    break;
+                }
+            }
         }
+        return result;
     }
 }

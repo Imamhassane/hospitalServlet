@@ -3,6 +3,7 @@ package ui;
 
 import lombok.SneakyThrows;
 import model.Medcin;
+import model.Personne;
 import model.Service;
 import service.*;
 
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet( urlPatterns = {"/service/*" })
 public class ServiceServlet extends HttpServlet {
@@ -43,12 +46,20 @@ public class ServiceServlet extends HttpServlet {
 
     @SneakyThrows
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getRequestURI();
         HttpSession session = request.getSession(true);
         long id = 0;
         if (request.getParameter("id") != null){
             id = Long.parseLong(request.getParameter("id"));
         }
+        List<String> names= new ArrayList<>();
+        for (Service s : serviceService.findAll()){
+            if (s.getLibelle() != null){
+                names.add(s.getLibelle());
+            }
+        }
+        request.setAttribute("names" , names);
+
+        String action = request.getRequestURI();
         switch (action){
             case "/hospital/service/list" :
                 request.setAttribute("serviceList" , serviceService.findAll());
@@ -67,18 +78,18 @@ public class ServiceServlet extends HttpServlet {
         }
     }
 
-    public boolean remove (long id) throws Exception {
+    public boolean remove(long id) throws Exception {
         Service service = serviceService.find(id);
         boolean isInSpecialite = specialiteService.findService(service);
         boolean isInMedcin = medcinService.findService(service);
+        boolean result = false;
         if (!isInSpecialite && !isInMedcin){
             serviceService.remove(service);
-            return true;
-        }else{
-            return false;
+            result =  true;
         }
-
+        return result;
     }
+
     public Service save(Service service , HttpServletRequest request){
         String libelle = request.getParameter("libelleService");
         service.setLibelle(libelle);

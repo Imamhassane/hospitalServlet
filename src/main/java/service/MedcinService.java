@@ -24,24 +24,28 @@ public class MedcinService extends AbstractFacade<Medcin> implements IMedcin {
         return session;
     }
 
-    public boolean findService(Service service){
-        try{
-            session.createQuery("SELECT m FROM Medcin m where m.service = :service" , Medcin.class)
-                    .setParameter("service" , service)
-                    .getSingleResult();
-            return true;
-        }catch (Exception e){
-            return false;
+    public boolean findService(Service service) throws Exception {
+        boolean result = false;
+        if (count() > 0){
+            for (Medcin m : findAll()){
+                if (m.getService().equals(service)) {
+                    result = true;
+                    break;
+                }
+            }
         }
+        return result;
     }
     public boolean findSpecialite(Specialite specialite) throws Exception {
-        List<Medcin> medcinList = findAll();
         List<Specialite> specialiteList = new ArrayList<>();
         boolean result = false;
-        for (int i = 0; i < medcinList.size(); i++) {
-            specialiteList.add(medcinList.get(i).getSpecialites().get(i));
-            if (specialiteList.get(i).getId()== specialite.getId()){
-                result =  true;
+        for (Medcin m : findAll()){
+            specialiteList.addAll(m.getSpecialites());
+        }
+        for (Specialite s : specialiteList){
+            if (specialite.equals(s)) {
+                result = true;
+                break;
             }
         }
        return result;

@@ -51,7 +51,7 @@
             <tr class="table-tbody-tr search-result" value="${service.libelle}">
                 <td>${service.libelle}</td>
                 <td class="text-center">
-                    <a  class="edit btn btn-warning">modifier</a>
+                    <a  class="edit btn btn-warning Sedit">modifier</a>
                     <a  class="delete btn btn-danger">supprimer</a>
                     <div class="remove-item" id="remove-item">
                         <div class="form-remove text-center">
@@ -66,6 +66,9 @@
                         <form class="formService" method="post" action="${pageContext.request.contextPath}/service/save">
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="id" value="${service.id}">
+                            <c:forEach items="${requestScope.names}" var="name">
+                                <input type="hidden" class="allEmails" value="${name}">
+                            </c:forEach>
                             <div class="form-controle">
                                 <label for="nom">Libelle</label>
                                 <input type="text" name="libelleService" class="nom w-100" value="${service.libelle}">
@@ -84,6 +87,9 @@
     <form id="formService" method="post" action="${pageContext.request.contextPath}/service/add">
         <input type="hidden" name="action" value="save">
         <input type="hidden" name="id" value="">
+        <c:forEach items="${requestScope.names}" var="name">
+            <input type="hidden" class="allEmails" value="${name}">
+        </c:forEach>
         <div class="form-controle">
             <label for="nom">Libelle</label>
             <input type="text" name="libelleService" class="w-100" id="nom" value="">

@@ -12,6 +12,6 @@ public interface IMedcin {
     Medcin find(long id) throws Exception;
     void remove(Medcin entity) throws Exception;
     long count() throws Exception;
-    public boolean findService(Service service);
+    public boolean findService(Service service) throws Exception;
     public boolean findSpecialite(Specialite specialite) throws Exception;
 }

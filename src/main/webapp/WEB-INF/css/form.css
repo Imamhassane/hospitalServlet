@@ -156,3 +156,9 @@ form .submit {
 a , h4{
     white-space: nowrap;
 }
+.form-remove{
+    width: 30% !important;
+}
+.form-remove h4{
+    white-space: initial;
+}

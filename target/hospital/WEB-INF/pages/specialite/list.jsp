@@ -60,7 +60,7 @@
                 <td>${specialite.libelle}</td>
                 <td>${specialite.service.libelle}</td>
                 <td class="text-center">
-                    <a class="edit btn btn-warning">modifier</a>
+                    <a class="edit btn btn-warning Sedit">modifier</a>
                     <a  class="delete btn btn-danger">supprimer</a>
                     <div class="remove-item" id="remove-item">
                         <div class="form-remove text-center">
@@ -75,6 +75,9 @@
                         <form method="post" class="formSpecialite" action="${pageContext.request.contextPath}/specialite/save">
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="id" value="${specialite.id}">
+                            <c:forEach items="${requestScope.names}" var="name">
+                                <input type="hidden" class="allEmails" value="${name}">
+                            </c:forEach>
                             <div class="form-controle">
                                 <label for="nom">Libelle</label>
                                 <input type="text" name="LibelleSpecialite" class="nom w-100" value="${specialite.libelle}">
@@ -103,6 +106,9 @@
     <form method="post" id="formSpecialite" action="${pageContext.request.contextPath}/specialite/add">
         <input type="hidden" name="action" value="save">
         <input type="hidden" name="id" value="">
+        <c:forEach items="${requestScope.names}" var="name">
+            <input type="hidden" class="allEmails" value="${name}">
+        </c:forEach>
         <div class="form-controle">
             <label for="nom">Libelle</label>
             <input type="text" name="LibelleSpecialite" class="w-100" id="nom" value="">
