@@ -118,8 +118,39 @@ function checkEmail(input) {
     }
 }
 
+function dateDiff(dateold)
+{
+    let pattern = /(\d{2})\.(\d{2})\.(\d{4})/;
+    let dt = new Date(dateold.replace(pattern,'$3-$2-$1'));
+    let Difference_In_Time = new Date().getTime() - dt.getTime();
+    return  Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+}
+function checkDateNaiss(input) {
+    if (input.value.trim() === '') {
+        showError(input,getFieldName(input) +" est obligatoire");
+    }else {
+        let days = dateDiff(input.value);
+        if (days < 7920){
+            showError(input,"Age doit etre a superieure ou egale a 22ans")
+        }else {
+            showSuccess(input)
+        }
+    }
+}
+function checkDateEmbauche(input) {
 
+    if (input.value.trim() === '') {
+        showError(input,getFieldName(input) +" est obligatoire");
+    }else {
+        let days = dateDiff(input.value);
+        if (days < 0){
+            showError(input,"Date invalide")
+        }else {
+            showSuccess(input)
+        }
+    }
 
+}
 /*service form*/
 //Events
 function verifServiceForm(form , input) {
@@ -181,10 +212,11 @@ if (formMedcinUpdate || formMedcin){
             checkLength(input2 , 2 , 10);
             checkLength(input3 ,  6, 7);
             checkLength(input4 ,  5, 10);
-            checkRequired([input5 , input6 ,input7, input8 ]);
+            checkRequired([input7, input8 ]);
             checkEmail(input9);
             emailExist(input9,"Cet email existe deja!");
-
+            checkDateNaiss(input5);
+            checkDateEmbauche(input6);
             for (let i = 0; i < isVerify.length; i++) {
                 if (isVerify[i]===false) {
                     e.preventDefault();//Bloquer la soumission du formulaire
